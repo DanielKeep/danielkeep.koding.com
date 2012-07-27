@@ -1,6 +1,9 @@
 
 #include <cstdlib>
 #include <iostream>
+#include <vector>
+
+#include "index.t.h"
 
 // *********************************************************************** //
 // *********************************************************************** //
@@ -10,6 +13,8 @@ using std::getenv;
 // <iostream>
 using std::cout;
 using std::endl;
+// <vector>
+using std::vector;
 
 // *********************************************************************** //
 // *********************************************************************** //
@@ -20,23 +25,31 @@ using std::endl;
 // *********************************************************************** //
 // *********************************************************************** //
 
+struct TemplateArgs
+{
+    vector<int> numbers;
+};
+
+// *********************************************************************** //
+// *********************************************************************** //
+
 int main(int argc, const char **argv)
 {
+    TemplateArgs targs;
+    
+    targs.numbers.push_back(1);
+    targs.numbers.push_back(1);
+    targs.numbers.push_back(2);
+    targs.numbers.push_back(3);
+    targs.numbers.push_back(5);
+    targs.numbers.push_back(8);
+    
     cout
         << u8"Content-Type: text/html; charset=utf-8" << endl
         << u8"X-Source-Repository: " << REPOSITORY << endl
         << endl;
 
-    cout
-        << u8"<!DOCTYPE html>" << endl
-        << u8"<html>" << endl
-        << u8"<body>" << endl
-        << u8"<h1>Hello, World!</h1>" << endl
-        << u8"<p>The <a href=\""
-            << REPOSITORY BLOB_PREFIX __FILE__
-            << "\">page source code</a> (possibly not live).</p>" << endl
-        << u8"</body>" << endl
-        << u8"</html>" << endl;
+    expand_index(cout, targs);
 
     return 0;
 }

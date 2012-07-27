@@ -1,0 +1,21 @@
+#include <vector>
+---
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Hello, World!</title>
+</head>
+<body>
+<h1>Hello, World!</h1>
+<p>Template filename: <tt><?= __FILE__ ?></tt></p>
+<p>List of numbers:</p>
+<ul>
+<?code
+    for(typename std::vector??[int??]::iterator i = data.numbers.begin(); i != data.numbers.end(); ++i)
+    {
+        ><li><?= *i ?></li><?code
+    }
+>
+</ul>
+</body>
+</html>
