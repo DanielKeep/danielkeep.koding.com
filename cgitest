@@ -1,9 +1,19 @@
 #!/usr/bin/bash
 
+if [ "$1" == "-g" ]; then
+	RUN_PREFIX=gdb
+	shift
+elif [ "$1" == "-d" ]; then
+	RUN_PREFIX=ddd
+	shift
+else
+	RUN_PREFIX=
+fi
+
 export REQUEST_METHOD=$1
 export REQUEST_URI=$2
 
 shift 2
 
-./index.cgi $@
+$RUN_PREFIX ./index.cgi $@
 
