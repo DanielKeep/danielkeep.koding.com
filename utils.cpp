@@ -243,8 +243,8 @@ string url_unencode(const string &str)
         case '%':
             {
                 char tmp[3];
-                ++i; tmp[0] = accum[i];
-                ++i; tmp[1] = accum[i];
+                ++i; tmp[0] = str[i];
+                ++i; tmp[1] = str[i];
                 tmp[2] = '\0';
                 
                 char cc = static_cast<char>(string_to_int(tmp, 16));
