@@ -1,6 +1,6 @@
 
 CXX=g++
-CXXFLAGS=-g -std=c++0x
+CXXFLAGS=-g -std=c++0x -DCXX11_NO_NULLPTR
 INSTALL=cp -a
 TC=./tc.py
 
@@ -18,7 +18,7 @@ install: $(INSTALL_FILES)
 index$(CGI_EXT): index.o
 	$(CXX) $(CXXFLAGS) -o $@ $(filter %.o,$^)
 
-index.o: index.t.h
+index.o: index.t.h c++11.h
 
 clean:
 	@- rm *.o
