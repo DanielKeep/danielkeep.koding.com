@@ -1,3 +1,7 @@
 
 DirectoryIndex index.cgi index.py index.html
 
+RewriteEngine on
+RewriteCond %{REQUEST_FILENAME} !-d
+RewriteCond %{REQUEST_FILENAME} !-f
+RewriteRule ^(.*)$ /index.cgi?action=map_url&url=$1

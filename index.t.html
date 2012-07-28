@@ -8,6 +8,10 @@
 <body>
 <h1>Hello, World!</h1>
 <p>Template filename: <tt><?= __FILE__ ?></tt></p>
+<form action="/form" method="POST">
+<p>POST a query: <input type="text" name="query"> <input type="submit" value="Submit"></p>
+<p>Additional POST value: <input type="text" name="extra"></p>
+</form>
 <p>List of numbers:</p>
 <ul>
 <?code
@@ -17,5 +21,12 @@
     }
 >
 </ul>
+<p>Request method: <tt><?= data.request_method ?></tt></p>
+<p>Query: <tt><?= data.query ?></tt></p>
+<p>Request content:</p>
+<pre><?= data.content ?></pre>
+<p>Environment variables:</p>
+<ul>
+<?= data.environ ?></ul>
 </body>
 </html>
