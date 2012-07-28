@@ -1,4 +1,6 @@
 /local
+/Makefile.local
 /*.o
 /*.cgi
 /*.t.h
+/*~

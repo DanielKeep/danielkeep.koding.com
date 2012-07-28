@@ -9,7 +9,11 @@
 #include <string>
 #include <vector>
 
+#include <unistd.h>
+
 #include "index.t.h"
+
+#include "utils.h"
 
 // *********************************************************************** //
 // *********************************************************************** //
@@ -48,13 +52,13 @@ struct TemplateArgs
 // *********************************************************************** //
 
 string mkstring(const char *);
-int string_to_int(const string &, int base = 0);
 
 // *********************************************************************** //
 // *********************************************************************** //
 
 int main(int argc, const char **argv)
 {
+    Request request = read_request();
     TemplateArgs targs;
     
     targs.numbers.push_back(1);
@@ -85,7 +89,7 @@ int main(int argc, const char **argv)
         << u8"X-Source-Repository: " << REPOSITORY << endl
         << endl;
 
-    expand_index(cout, targs);
+    expand_index(cout, request, targs);
 
     return 0;
 }
@@ -98,41 +102,4 @@ string mkstring(const char *ptr)
         return string();
     else
         return string(ptr);
-}
-
-// *********************************************************************** //
-
-int string_to_int(const string &str, int base)
-{
-    const char *s = str.c_str();
-    char *end;
-    int i;
-    long  l;
-    
-    errno = 0;
-    l = strtol(s, &end, base);
-    
-    if ((errno == ERANGE && l == LONG_MAX) || l > INT_MAX)
-    {
-        throw std::overflow_error(
-            string("overflow in converting \"")
-            + str + string("\" to int"));
-    }
-    
-    if ((errno == ERANGE && l == LONG_MIN) || l < INT_MIN)
-    {
-        throw std::underflow_error(
-            string("underflow in converting \"")
-            + str + string("\" to int"));
-    }
-    
-    if (*s == '\0' || *end != '\0')
-    {
-        throw std::runtime_error(
-            string("cannot convert \"")
-            + str + string("\" to int"));
-    }
-    
-    i = l;
-    return i;
 }
