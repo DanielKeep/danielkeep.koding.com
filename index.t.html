@@ -1,3 +1,5 @@
+#include <map>
+#include <string>
 #include <vector>
 ---
 <!DOCTYPE html>
@@ -8,9 +10,13 @@
 <body>
 <h1>Hello, World!</h1>
 <p>Template filename: <tt><?= __FILE__ ?></tt></p>
-<form action="/form" method="POST">
+<form action="/form" method="GET">
+<p>GET a query: <input type="text" name="query"> <input type="submit" value="Submit"></p>
+</form>
+<form action="/form" method="POST" enctype="multipart/form-data">
 <p>POST a query: <input type="text" name="query"> <input type="submit" value="Submit"></p>
 <p>Additional POST value: <input type="text" name="extra"></p>
+<p>POST a file: <input type="file" name="file"></p>
 </form>
 <p>List of numbers:</p>
 <ul>
@@ -21,8 +27,17 @@
     }
 >
 </ul>
-<p>Request method: <tt><?= data.request_method ?></tt></p>
-<p>Query: <tt><?= data.query ?></tt></p>
+<p>Request method: <tt><?= request.method ?></tt></p>
+<p>Query parameters:</p>
+<ul>
+<?code
+    for(typename std::map??[std::string, std::string??]::iterator i = request.query_params.begin();
+        i != request.query_params.end(); ++i)
+    {
+        ?><li><tt><?= i-??]first ?></tt> = <tt><?= i-??]second ?></tt></li><?code
+    }
+?>
+</ul>
 <p>Request content:</p>
 <pre><?= data.content ?></pre>
 <p>Environment variables:</p>

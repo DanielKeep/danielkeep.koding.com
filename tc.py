@@ -114,8 +114,9 @@ def main(args):
     
     def write_template_prologue():
         out_file.write(u'#include <iostream>\n')
-        out_file.write(u'template<typename Data>\n')
-        out_file.write(u'void expand_%s(std::ostream &output, Data &data)\n' % name)
+        out_file.write(u'template<typename Request, typename Data>\n')
+        out_file.write((u'void expand_%s(std::ostream &output, '
+            + u'Request &request, Data &data)\n') % name)
         out_file.write(u'{\n')
         
     def write_template_epilogue():

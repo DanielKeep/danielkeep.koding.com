@@ -11,6 +11,8 @@
 
 #include "index.t.h"
 
+#include "utils.h"
+
 // *********************************************************************** //
 // *********************************************************************** //
 
@@ -55,6 +57,7 @@ int string_to_int(const string &, int base = 0);
 
 int main(int argc, const char **argv)
 {
+    Request request = read_request();
     TemplateArgs targs;
     
     targs.numbers.push_back(1);
@@ -85,7 +88,7 @@ int main(int argc, const char **argv)
         << u8"X-Source-Repository: " << REPOSITORY << endl
         << endl;
 
-    expand_index(cout, targs);
+    expand_index(cout, request, targs);
 
     return 0;
 }

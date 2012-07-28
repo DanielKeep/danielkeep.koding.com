@@ -15,10 +15,10 @@ all: $(INSTALL_FILES)
 install: $(INSTALL_FILES)
 	$(INSTALL) $^ $(INSTALL_DIR)
 
-index$(CGI_EXT): index.o
+index$(CGI_EXT): index.o utils.o
 	$(CXX) $(CXXFLAGS) -o $@ $(filter %.o,$^)
 
-index.o: index.t.h c++11.h
+index.o: index.t.h c++11.h utils.h
 
 clean:
 	@- rm *.o
@@ -30,6 +30,6 @@ clean-dist:
 %.o: %.cpp
 	$(CXX) $(CXXFLAGS) -c $<
 
-%.t.h: %.t.html
+%.t.h: %.t.html $(TC)
 	$(TC) $(patsubst %.t.html,%,$<) $< $@
 
