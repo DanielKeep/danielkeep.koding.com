@@ -1,0 +1,9 @@
+#!/usr/bin/bash
+
+export REQUEST_METHOD=$1
+export REQUEST_URI=$2
+
+shift 2
+
+./index.cgi $@
+
